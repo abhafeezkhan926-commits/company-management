@@ -1,0 +1,2 @@
+const map: Record<string, string> = { present: 'badge success', absent: 'badge danger', pending: 'badge warning', approved: 'badge success', rejected: 'badge danger', active: 'badge success', completed: 'badge success', in_progress: 'badge info', review: 'badge warning', todo: 'badge neutral', planning: 'badge neutral', on_hold: 'badge warning' };
+export function StatusBadge({ value }: { value?: string }) { const label = (value || 'unknown').replace(/_/g, ' '); return <span className={map[value || ''] || 'badge neutral'}>{label}</span>; }

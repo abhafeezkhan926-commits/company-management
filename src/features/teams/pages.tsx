@@ -1,0 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
+import { api, apiError } from '@/services/api';
+import { PageHeader } from '@/components/PageHeader';
+export function Teams(){const q=useQuery({queryKey:['teams'],queryFn:async()=> (await api.get('/teams')).data.teams});return <><PageHeader title="Teams" description="Operational groups based on current company membership."/>{q.isError?<div className="alert danger">{apiError(q.error)}</div>:null}<div className="list-card">{q.data?.length===0?<div className="empty-state"><strong>No teams yet</strong><span>Teams appear as employees are assigned to departments and roles.</span></div>:null}{q.data?.map((t:any)=><div className="list-row" key={t.name}><div><strong>{t.name}</strong><span>Lead: {t.lead}</span></div><span>{t.members} members</span></div>)}</div></>}
